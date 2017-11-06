@@ -2,4 +2,4 @@
 
 API: <https://api.gg.blackdarkness.dk>.
 
-Highscores: <https://api.gg.blackdarkness.dk>.
+Highscores: <https://api.gg.blackdarkness.dk/highscores>.
