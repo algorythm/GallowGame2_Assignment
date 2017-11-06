@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Name Description -->
+    <TextView
+        android:id="@+id/hsitem_nameDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/hsitem_nameDesc"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Name Value -->
+    <TextView
+        android:id="@+id/hsitem_name"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="16dp"
+        android:text="NULL"
+        app:layout_constraintStart_toStartOf="@+id/hsitem_score"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Score Description -->
+    <TextView
+        android:id="@+id/hsitem_scoreDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/hsitem_scoreDesc"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hsitem_nameDesc" />
+
+    <!-- Score Value -->
+    <TextView
+        android:id="@+id/hsitem_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="NULL"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@+id/hsitem_scoreDesc"
+        app:layout_constraintTop_toBottomOf="@+id/hsitem_name" />
+</android.support.constraint.ConstraintLayout>

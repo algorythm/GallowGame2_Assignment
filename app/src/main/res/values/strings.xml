@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Gallow Game</string>
+
+    <!-- HIGHSCORE ITEM -->
+    <string name="hsitem_nameDesc">Name: </string>
+    <string name="hsitem_scoreDesc">Score: </string>
 </resources>
