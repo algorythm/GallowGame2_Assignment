@@ -7,12 +7,80 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="369dp"
-        android:layout_height="32dp"
+        android:id="@+id/game_tvVisibleWordDescription"
+        android:layout_width="44dp"
+        android:layout_height="18dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="The Game!!!!!!!!"
+        android:text="Word: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/game_tvVisibleWord"
+        android:layout_width="261dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/game_tvVisibleWordDescription"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/game_tvGuessedLettersDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Letters: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_tvVisibleWordDescription" />
+
+    <TextView
+        android:id="@+id/game_tvGuessedLetters"
+        android:layout_width="269dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="None"
+        app:layout_constraintStart_toEndOf="@+id/game_tvGuessedLettersDescription"
+        app:layout_constraintTop_toBottomOf="@+id/game_tvVisibleWord" />
+
+    <ImageView
+        android:id="@+id/game_gallowImage"
+        android:layout_width="292dp"
+        android:layout_height="364dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/game_etGuessLetter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/game_tvGuessedLetters"
+        app:srcCompat="@drawable/gallow" />
+
+    <EditText
+        android:id="@+id/game_etGuessLetter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Guess a letter..."
+        android:inputType="textCapCharacters"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/game_guessBtn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/game_guessBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Guess!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>
