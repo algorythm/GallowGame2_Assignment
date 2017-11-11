@@ -1,4 +1,4 @@
-package dk.blackdarkness.gg;
+package dk.blackdarkness.gg.gallowgame.logic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-public class GallowLogic {
+public class GallowGame {
     private ArrayList<String> possibleWords = new ArrayList<>();
     private String word;
     private ArrayList<String> usedLetters = new ArrayList<>();
@@ -45,7 +45,7 @@ public class GallowLogic {
     }
     public boolean isGameOver() { return this.gameHasBeenLost || this.gameHasBeenWon; }
 
-    public GallowLogic() {
+    public GallowGame() {
         possibleWords.add("car");
         possibleWords.add("computer");
         possibleWords.add("programming");
@@ -56,6 +56,17 @@ public class GallowLogic {
         possibleWords.add("bird");
 
         reset();
+    }
+
+    public GallowGame(GallowGame gallowGame) {
+        this.possibleWords = gallowGame.getPossibleWords();
+        this.word = gallowGame.getWord();
+        this.usedLetters = gallowGame.getUsedLetters();
+        this.visibleWord = gallowGame.getVisibleWord();
+        this.wrongLettersCount = gallowGame.getWrongLettersCount();
+//        this.lastGuessedLetterIsCorrect = gallowGame.lastGuessedLetterIsCorrect; // todo: wont work - needs a getter method
+        this.gameHasBeenWon = gallowGame.isGameWon();
+        this.gameHasBeenLost = gallowGame.isGameLost();
     }
 
     public void reset() {
@@ -81,8 +92,9 @@ public class GallowLogic {
         }
     }
 
-    public void guess(String letter) {
-        letter = letter.toLowerCase();
+    public void guess(String givenLetter) {
+        final String letter = givenLetter.toLowerCase();
+        System.out.println("Guess: " + letter);
 
         if (letter.length() != 1) return;
         System.out.println("User guess: " + letter);
