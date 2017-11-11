@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
     private SharedPreferences mPrefs;
     private SharedPreferences.Editor prefsEditor;
 
-    private final String gameProgressPreferenceName = "gameProgress";
+    private String gameProgressPreferenceName;
 
     private GallowGame game;
     private TextView tvVisibleWord;
@@ -42,6 +42,7 @@ public class GameActivity extends AppCompatActivity {
 
         mPrefs = getPreferences(MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
+        gameProgressPreferenceName = getResources().getString(R.string.gameProgressPreferenceName);
 
         this.tvVisibleWord = findViewById(R.id.game_tvVisibleWord);
         this.tvGuessedLetters = findViewById(R.id.game_tvGuessedLetters);

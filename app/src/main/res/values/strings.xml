@@ -4,4 +4,7 @@
     <!-- HIGHSCORE ITEM -->
     <string name="hsitem_nameDesc">Name: </string>
     <string name="hsitem_scoreDesc">Score: </string>
+
+    <!-- Shared Preferences -->
+    <string name="gameProgressPreferenceName">gameProgress</string>
 </resources>
