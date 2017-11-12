@@ -14,7 +14,6 @@ import dk.blackdarkness.gg.api.service.Highscore;
 import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button testSaveHighscoreBtn; // TODO: TEMPORARY only!!!!
     private Button btnStartGame, btnHighscores, btnClearAllPrefs;
     private TextView winnerText, highscoreText;
 
@@ -30,12 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.winnerText = findViewById(R.id.main_winnerText);
         this.highscoreText = findViewById(R.id.main_tvHighscore);
 
-        this.testSaveHighscoreBtn= findViewById(R.id.testSaveHS); // TODO: TEMPORARY only!!!!
-
         this.btnStartGame.setOnClickListener(this);
         this.btnHighscores.setOnClickListener(this);
         this.btnClearAllPrefs.setOnClickListener(this);
-        this.testSaveHighscoreBtn.setOnClickListener(this); // TODO: TEMPORARY only!!!!
 
         this.winnerText.setText("");
         this.setHighscoreText();
@@ -47,30 +43,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.main_btnStartGame: startGame(); break;
             case R.id.main_btnHighscores: gotoHighscores(); break;
             case R.id.main_clearPrefs: clearAllPrefsBtn(); break;
-            case R.id.testSaveHS: testSaveHSClicked(); break; // TODO: TEMPORARY only!!!!
         }
     }
-
-    private void testSaveHSClicked() { // TODO: TEMPORARY only!!!!
-        final Intent getAddHSIntent = new Intent(this, AddHighscoreActivity.class);
-        startActivity(getAddHSIntent);
-    }
-
     private void setHighscoreText() {
         double personalHighscore = GameStateManager.getInstance(this).getPersonalHighscore();
         if (personalHighscore == -1.0) {
             this.highscoreText.setText("Personal Highscore: There are no personal highscores.");
         } else {
             this.highscoreText.setText("Personal Highscore: " + personalHighscore);
-        }
-
-
-        System.out.println("Current latest score: " + GameStateManager.getInstance(this).getLatestScore());
-        System.out.println("Personal highscore: " + GameStateManager.getInstance(this).getPersonalHighscore());
-        if (GameStateManager.getInstance(this).getLatestScore() == -1.0) {
-            testSaveHighscoreBtn.setVisibility(View.GONE);
-        } else {
-            testSaveHighscoreBtn.setVisibility(View.VISIBLE);
         }
     }
 
