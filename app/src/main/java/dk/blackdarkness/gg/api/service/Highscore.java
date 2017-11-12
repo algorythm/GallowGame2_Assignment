@@ -13,8 +13,7 @@ public class Highscore {
 
     public Highscore() { }
 
-    public Highscore(int id, String name, String word, String guessed_letters, String score) {
-        this.id = id;
+    public Highscore(String name, String word, String guessed_letters, String score) {
         this.name = name;
         this.word = word;
         this.guessed_letters = guessed_letters;

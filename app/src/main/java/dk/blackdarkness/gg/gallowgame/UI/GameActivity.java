@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import dk.blackdarkness.gg.R;
+import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
 import dk.blackdarkness.gg.gallowgame.logic.GallowGame;
 
 /**
@@ -23,10 +24,10 @@ import dk.blackdarkness.gg.gallowgame.logic.GallowGame;
  */
 
 public class GameActivity extends AppCompatActivity {
-    private SharedPreferences mPrefs;
-    private SharedPreferences.Editor prefsEditor;
+//    private SharedPreferences mPrefs;
+//    private SharedPreferences.Editor prefsEditor;
 
-    private String gameProgressPreferenceName;
+//    private String gameProgressPreferenceName;
 
     private GallowGame game;
     private TextView tvVisibleWord;
@@ -40,9 +41,9 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallowgame);
 
-        mPrefs = getPreferences(MODE_PRIVATE);
-        prefsEditor = mPrefs.edit();
-        gameProgressPreferenceName = getResources().getString(R.string.gameProgressPreferenceName);
+//        mPrefs = getPreferences(MODE_PRIVATE);
+//        prefsEditor = mPrefs.edit();
+//        gameProgressPreferenceName = getResources().getString(R.string.gameProgressPreferenceName);
 
         this.tvVisibleWord = findViewById(R.id.game_tvVisibleWord);
         this.tvGuessedLetters = findViewById(R.id.game_tvGuessedLetters);
@@ -84,14 +85,13 @@ public class GameActivity extends AppCompatActivity {
 
     private void startNewGame() {
         loadProgressOrStartNew();
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
             // Save progress
-            saveProgress();
+            GameStateManager.getInstance(this).saveProgress(this.game);
 
             this.finish();
         }
@@ -99,33 +99,14 @@ public class GameActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveProgress() {
-        Gson gson = new Gson();
-        String json =gson.toJson(game);
 
-        prefsEditor.putString(gameProgressPreferenceName, json);
-        prefsEditor.commit();
-    }
 
     private void loadProgressOrStartNew() {
-        // Try to load a new game
-        Gson gson = new Gson();
-        String json = mPrefs.getString(gameProgressPreferenceName, null);
-
-        GallowGame oldGame = gson.fromJson(json, GallowGame.class);
-        this.game = oldGame;
-
-        // If no previous game, start a new
-        if (this.game == null) {
-            this.game = new GallowGame();
-        }
+        this.game = GameStateManager.getInstance(this).loadProgressOrStartNew();
 
         setGallowImage();
         this.tvVisibleWord.setText(this.game.getVisibleWord());
-    }
 
-    private void clearProgress() {
-        prefsEditor.remove(gameProgressPreferenceName).commit();
     }
 
     private void guessLetter() {
@@ -175,7 +156,8 @@ public class GameActivity extends AppCompatActivity {
         goingBack.putExtra("gameWon", gameWon);
         setResult(RESULT_OK, goingBack);
 
-        clearProgress();
+        GameStateManager.getInstance(this).clearProgress();
+        GameStateManager.getInstance(this).saveScore(this.game);
 
         this.finish();
     }

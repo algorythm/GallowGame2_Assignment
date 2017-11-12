@@ -3,17 +3,19 @@ package dk.blackdarkness.gg.gallowgame.UI;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import dk.blackdarkness.gg.R;
+import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnStartGame;
     private Button btnHighscores;
-    private TextView demotext;
+    private Button btnClearAllPrefs;
+    private TextView winnerText;
+    private TextView highscoreText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         this.btnStartGame = findViewById(R.id.main_btnStartGame);
         this.btnHighscores = findViewById(R.id.main_btnHighscores);
+        this.btnClearAllPrefs = findViewById(R.id.main_clearPrefs);
 
-        this.demotext = findViewById(R.id.demotext);
+        this.winnerText = findViewById(R.id.main_winnerText);
+        this.highscoreText = findViewById(R.id.main_tvHighscore);
 
         this.btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,8 +41,24 @@ public class MainActivity extends AppCompatActivity {
                 gotoHighscores();
             }
         });
+        this.btnClearAllPrefs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearAllPrefsBtn();
+            }
+        });
 
-        this.demotext.setText("");
+        this.winnerText.setText("");
+        this.setHighscoreText();
+    }
+
+    private void setHighscoreText() {
+        double personalHighscore = GameStateManager.getInstance(this).getPersonalHighscore();
+        if (personalHighscore == -1.0) {
+            this.highscoreText.setText("Highscore: There are no personal highscores.");
+        } else {
+            this.highscoreText.setText("Highscore: " + personalHighscore);
+        }
     }
 
     private void startGame() {
@@ -51,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
     private void gotoHighscores() {
         final Intent getHighscores = new Intent(this, HighscoresActivity.class);
         startActivity(getHighscores);
+    }
+
+    private void clearAllPrefsBtn() {
+        GameStateManager.getInstance(this).clearAll();
+        this.setHighscoreText();
     }
 
     @Override
@@ -67,11 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
             gameWonText += ".";
 
-            this.demotext.setText(gameWonText);
+            this.winnerText.setText(gameWonText);
+            this.setHighscoreText();
         }
         catch (NullPointerException e)
         {
-            this.demotext.setText("Game discontinued - game progress saved.");
+            this.winnerText.setText("Game discontinued - game progress saved.");
         }
     }
 }

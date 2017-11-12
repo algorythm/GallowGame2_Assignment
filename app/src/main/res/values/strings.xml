@@ -7,4 +7,6 @@
 
     <!-- Shared Preferences -->
     <string name="gameProgressPreferenceName">gameProgress</string>
+    <string name="latestScorePreference"></string>
+    <string name="highestScorePreference"></string>
 </resources>

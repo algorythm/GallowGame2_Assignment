@@ -31,6 +31,13 @@ public class GallowGame {
     public ArrayList<String> getUsedLetters() {
         return this.usedLetters;
     }
+    public String getUsedLettersStr() {
+        String usedLetters = "";
+        for (String l : this.usedLetters) {
+            usedLetters += l;
+        }
+        return usedLetters;
+    }
     public int getWrongLettersCount() {
         return this.wrongLettersCount;
     }
@@ -156,5 +163,35 @@ public class GallowGame {
 
         System.out.println("possibleWords = " + possibleWords);
         reset();
+    }
+
+    public double calculateScore() {
+        if (!this.isGameOver()) return -1.0;
+
+        final int lengthOfWord = this.word.length();
+        final int uniqueLetterCount = this.uniqueLettersOfWord().length();
+        final int wrongGuessCount = this.wrongLettersCount;
+
+        final double score = (lengthOfWord + uniqueLetterCount) / (wrongGuessCount + 1);
+
+        return score;
+    }
+
+    public String calculateScoreStr() {
+        return Double.toString(this.calculateScore());
+    }
+
+    public String uniqueLettersOfWord() {
+        String uniqueLetters = "";
+
+        for (int i = 0; i < this.word.length(); i++) {
+            char current = this.word.charAt(i);
+            if (uniqueLetters.indexOf(current) < 0)
+                uniqueLetters += current;
+            else
+                uniqueLetters = uniqueLetters.replace(String.valueOf(current), "");
+        }
+
+        return uniqueLetters;
     }
 }
