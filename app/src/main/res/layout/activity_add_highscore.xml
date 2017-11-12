@@ -10,20 +10,20 @@
         android:id="@+id/addhs_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/recentlyWonGameYN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/recentlyWonGameYN" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/addhs_score_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/addhs_desc"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"
         android:textColor="@color/colorPrimaryDark"
-        tools:text="@string/score" />
+        android:text="@string/score"
+        app:layout_constraintTop_toBottomOf="@+id/addhs_desc"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/addhs_score"
@@ -32,9 +32,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
         android:textColor="@color/colorAccent"
-        app:layout_constraintStart_toEndOf="@+id/addhs_score_desc"
-        app:layout_constraintTop_toBottomOf="@+id/addhs_desc"
-        tools:text="14" />
+        android:text="14"
+        app:layout_constraintStart_toEndOf="@id/addhs_score_desc"
+        app:layout_constraintTop_toBottomOf="@+id/addhs_desc" />
 
     <EditText
         android:id="@+id/addhs_name"
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/addhs_name">
+        app:layout_constraintBottom_toBottomOf="parent">
 
 
         <Button
@@ -80,4 +80,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"
         android:visibility="invisible" />
+
 </android.support.constraint.ConstraintLayout>

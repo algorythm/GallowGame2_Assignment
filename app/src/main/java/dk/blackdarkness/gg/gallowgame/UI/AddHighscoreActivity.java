@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import dk.blackdarkness.gg.R;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class AddHighscoreActivity extends AppCompatActivity implements View.OnClickListener {
     private Button saveBtn, cancelBtn;
+    private TextView scoreText;
     private EditText nameText;
     private ProgressBar spinner;
 
@@ -34,11 +36,14 @@ public class AddHighscoreActivity extends AppCompatActivity implements View.OnCl
 
         saveBtn = findViewById(R.id.addhs_saveBtn);
         cancelBtn = findViewById(R.id.addhs_cancelBtn);
+        scoreText = findViewById(R.id.addhs_score);
         nameText = findViewById(R.id.addhs_name);
         spinner = findViewById(R.id.addhs_spinner);
 
         saveBtn.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
+
+        scoreText.setText(Double.toString(GameStateManager.getInstance(this).getLatestScore()));
     }
 
     @Override
