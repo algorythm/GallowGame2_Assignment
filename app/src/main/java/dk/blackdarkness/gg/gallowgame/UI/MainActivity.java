@@ -14,7 +14,7 @@ import dk.blackdarkness.gg.api.service.Highscore;
 import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button btnStartGame, btnHighscores, btnClearAllPrefs;
+    private Button btnStartGame, btnHighscores, btnClearAllPrefs, btnCredits;
     private TextView winnerText, highscoreText;
 
     @Override
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.btnStartGame = findViewById(R.id.main_btnStartGame);
         this.btnHighscores = findViewById(R.id.main_btnHighscores);
         this.btnClearAllPrefs = findViewById(R.id.main_clearPrefs);
+        this.btnCredits = findViewById(R.id.main_creditsBtn);
 
         this.winnerText = findViewById(R.id.main_winnerText);
         this.highscoreText = findViewById(R.id.main_tvHighscore);
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.btnStartGame.setOnClickListener(this);
         this.btnHighscores.setOnClickListener(this);
         this.btnClearAllPrefs.setOnClickListener(this);
+        this.btnCredits.setOnClickListener(this);
 
         this.winnerText.setText("");
         this.setHighscoreText();
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.main_btnStartGame: startGame(); break;
             case R.id.main_btnHighscores: gotoHighscores(); break;
             case R.id.main_clearPrefs: clearAllPrefsBtn(); break;
+            case R.id.main_creditsBtn: creditsBtnClicked(); break;
         }
     }
     private void setHighscoreText() {
@@ -69,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void clearAllPrefsBtn() {
         GameStateManager.getInstance(this).clearAll();
         this.setHighscoreText();
+    }
+
+    private void creditsBtnClicked() {
+        System.out.println("SHOWING Credits!!");
+        final Intent getCredits = new Intent(this, CreditsActivity.class);
+        startActivity(getCredits);
     }
 
     @Override

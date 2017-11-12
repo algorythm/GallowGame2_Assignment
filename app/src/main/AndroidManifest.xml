@@ -27,6 +27,10 @@
             android:name=".gallowgame.UI.AddHighscoreActivity"
             android:label="Save Highscore"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".gallowgame.UI.CreditsActivity"
+            android:label="Credits"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
