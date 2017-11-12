@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/addhs_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/recentlyWonGameYN" />
+
+    <TextView
+        android:id="@+id/addhs_score_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/addhs_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorPrimaryDark"
+        tools:text="@string/score" />
+
+    <TextView
+        android:id="@+id/addhs_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@+id/addhs_score_desc"
+        app:layout_constraintTop_toBottomOf="@+id/addhs_desc"
+        tools:text="14" />
+
+    <EditText
+        android:id="@+id/addhs_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Enter name..."
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/addhs_score" />
+
+    <LinearLayout
+        android:id="@+id/addhs_buttonLayoutGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/addhs_name">
+
+
+        <Button
+            android:id="@+id/addhs_saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save"
+            android:enabled="true"/>
+
+        <Button
+            android:id="@+id/addhs_cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:enabled="true"/>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/addhs_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/addhs_buttonLayoutGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible" />
+</android.support.constraint.ConstraintLayout>

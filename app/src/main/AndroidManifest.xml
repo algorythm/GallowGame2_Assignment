@@ -22,7 +22,11 @@
             android:name=".gallowgame.UI.GameActivity"
             android:label="Game"
             android:theme="@style/AppTheme" />
-        <activity android:name=".gallowgame.UI.HighscoresActivity"></activity>
+        <activity android:name=".gallowgame.UI.HighscoresActivity" />
+        <activity
+            android:name=".gallowgame.UI.AddHighscoreActivity"
+            android:label="Save Highscore"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -7,6 +7,16 @@
 
     <!-- Shared Preferences -->
     <string name="gameProgressPreferenceName">gameProgress</string>
-    <string name="latestScorePreference"></string>
-    <string name="highestScorePreference"></string>
+    <string name="latestScorePreference">latestScore</string>
+    <string name="highestScorePreference">personalHighscore</string>
+
+    <!-- Add Highscore Activity -->
+    <string name="recentlyWonGameYN">You have recently won a game. Save highscore online?</string>
+    <string name="score">Score: </string>
+
+    <!-- General buttons -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

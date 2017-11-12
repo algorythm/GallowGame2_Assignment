@@ -9,12 +9,13 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.api.service.Highscore;
-import dk.blackdarkness.gg.gallowgame.ctrl.FetchHighscores;
+import dk.blackdarkness.gg.gallowgame.ctrl.HighscoreService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,13 +34,13 @@ public class HighscoresActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setTitle("Highscores");
+        getSupportActionBar().setTitle("HighscoreService");
 
         spinner = findViewById(R.id.highscores_loadingSpinner);
         loadingText = findViewById(R.id.highscores_loadingText);
         listView = findViewById(R.id.highscores_listView);
 
-//        new FetchHighscores().execute();
+//        new HighscoreService().execute();
         fetchHighscores();
     }
 
@@ -52,7 +53,7 @@ public class HighscoresActivity extends AppCompatActivity {
     }
 
     private void fetchHighscores() {
-        FetchHighscores.fetchHighscores().enqueue(new Callback<List<Highscore>>() {
+        HighscoreService.getFetchAsync().enqueue(new Callback<List<Highscore>>() {
             @Override
             public void onResponse(Call<List<Highscore>> call, Response<List<Highscore>> response) {
                 List<Highscore> highscores = response.body();
@@ -62,7 +63,10 @@ public class HighscoresActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Highscore>> call, Throwable t) {
-                Log.e("FETCH", "Failed to fetch highscores.");
+                Log.e("FETCH", "Failed to getFetchAsync highscores.");
+                Toast failureToast = Toast.makeText(getApplicationContext(), "Failed to fetch highscores. Check internet...", Toast.LENGTH_LONG);
+                failureToast.show();
+                finish();
             }
         });
     }

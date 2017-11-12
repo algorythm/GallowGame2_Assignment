@@ -35,9 +35,8 @@ public class HighscoreAdapter extends ArrayAdapter {
         final TextView scoreTextView = hsItem.findViewById(R.id.hsitem_score);
 
         nameTextView.setText(highscore.getName());
-        scoreTextView.setText(highscore.getScore());
+        scoreTextView.setText(Double.toString(highscore.getScore()));
 
         return hsItem;
-//        return super.getView(position, convertView, parent);
     }
 }

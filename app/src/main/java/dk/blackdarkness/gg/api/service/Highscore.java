@@ -9,11 +9,11 @@ public class Highscore {
     private String name;
     private String word;
     private String guessed_letters;
-    private String score;
+    private double score;
 
     public Highscore() { }
 
-    public Highscore(String name, String word, String guessed_letters, String score) {
+    public Highscore(String name, String word, String guessed_letters, double score) {
         this.name = name;
         this.word = word;
         this.guessed_letters = guessed_letters;
@@ -48,11 +48,11 @@ public class Highscore {
         this.guessed_letters = guessed_letters;
     }
 
-    public String getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(double score) {
         this.score = score;
     }
 }

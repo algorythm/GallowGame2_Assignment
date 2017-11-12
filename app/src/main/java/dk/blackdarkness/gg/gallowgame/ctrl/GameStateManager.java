@@ -1,18 +1,15 @@
 package dk.blackdarkness.gg.gallowgame.ctrl;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
 
-import java.util.Arrays;
-
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.api.service.Highscore;
 import dk.blackdarkness.gg.gallowgame.logic.GallowGame;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by awo on 12/11/2017.
@@ -36,10 +33,12 @@ public final class GameStateManager {
     }
 
     private void initialize() {
-        mPrefs = this.act.getPreferences(MODE_PRIVATE);
+        mPrefs = this.act.getPreferences(Context.MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
 
         this.gameProgressPreferenceName = act.getResources().getString(R.string.gameProgressPreferenceName);
+        this.latestScorePreference = act.getResources().getString(R.string.latestScorePreference);
+        this.highestScorePreference = act.getResources().getString(R.string.highestScorePreference);
     }
 
     public static GameStateManager getInstance(Activity act) {
@@ -102,39 +101,38 @@ public final class GameStateManager {
 
     public void saveScore(GallowGame game) {
         Gson gson = new Gson();
+        System.out.println();
 
-        final Highscore highscore = new Highscore(null, game.getWord(), game.getUsedLettersStr(), game.calculateScoreStr());
+        final Highscore score = new Highscore(null, game.getWord(), game.getUsedLettersStr(), game.calculateScore());
 
-        String json = gson.toJson(highscore);
+        String json = gson.toJson(score);
 
-        if (game.calculateScore() > getPersonalHighscore())
+        if (game.calculateScore() > getPersonalHighscore()) {
             savePersonalHighscore(json);
+        }
 
         saveLatestScore(json);
     }
 
-    private void saveLatestScore(String json) {
+    public void saveLatestScore(String json) {
         prefsEditor.putString(latestScorePreference, json);
         prefsEditor.commit();
     }
 
-    private void savePersonalHighscore(String json) {
+    public void savePersonalHighscore(String json) {
         prefsEditor.putString(highestScorePreference, json);
         prefsEditor.commit();
     }
 
     public double getLatestScore() {
-        Gson gson = new Gson();
-        String json = mPrefs.getString(latestScorePreference, null);
-
-        final Highscore highscoreObj = gson.fromJson(json, Highscore.class);
+        final Highscore highscoreObj = getLatestScoreObj();
 
         if (highscoreObj == null) return -1.0;
 
         double highscore = -1.0;
 
         try {
-            highscore = Double.parseDouble(highscoreObj.getScore());
+            highscore = highscoreObj.getScore();
         } catch (NumberFormatException e) {
             Log.e("PARSE_FAIL", "Failed to parse stored score as a double.", e);
         }
@@ -142,8 +140,19 @@ public final class GameStateManager {
         return highscore;
     }
 
+    public Highscore getLatestScoreObj() {
+        Gson gson = new Gson();
+//        String json = mPrefs.getString(latestScorePreference, null);
+        String json = mPrefs.getString(latestScorePreference, null);
+
+        final Highscore highscoreObj = gson.fromJson(json, Highscore.class);
+
+        return highscoreObj;
+    }
+
     public double getPersonalHighscore() {
         Gson gson = new Gson();
+//        String json = mPrefs.getString(highestScorePreference, null);
         String json = mPrefs.getString(highestScorePreference, null);
 
         final Highscore highscoreObj = gson.fromJson(json, Highscore.class);
@@ -153,7 +162,7 @@ public final class GameStateManager {
         double highscore = -1.0;
 
         try {
-            highscore = Double.parseDouble(highscoreObj.getScore());
+            highscore = highscoreObj.getScore();
         } catch (NumberFormatException e) {
             Log.e("PARSE_FAIL", "Failed to parse stored score as a double.", e);
         }

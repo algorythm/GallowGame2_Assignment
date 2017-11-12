@@ -132,7 +132,8 @@ public class GallowGame {
         System.out.println("- wrongLettersCount = " + wrongLettersCount);
         System.out.println("- usedLetters = " + usedLetters);
         if (gameHasBeenLost) System.out.println("- GAME LOST");
-        if (gameHasBeenWon) System.out.println("- GAME WON");
+        if (gameHasBeenWon) {System.out.println("- GAME WON"); System.out.println(" - Score = " + this.calculateScore()); }
+
         System.out.println("---------- ");
     }
 
@@ -175,10 +176,6 @@ public class GallowGame {
         final double score = (lengthOfWord + uniqueLetterCount) / (wrongGuessCount + 1);
 
         return score;
-    }
-
-    public String calculateScoreStr() {
-        return Double.toString(this.calculateScore());
     }
 
     public String uniqueLettersOfWord() {
