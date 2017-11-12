@@ -40,7 +40,6 @@ public class HighscoresActivity extends AppCompatActivity {
         loadingText = findViewById(R.id.highscores_loadingText);
         listView = findViewById(R.id.highscores_listView);
 
-//        new HighscoreService().execute();
         fetchHighscores();
     }
 
