@@ -3,12 +3,9 @@ package dk.blackdarkness.gg.gallowgame.ctrl;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
-
-import java.io.IOException;
 
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.api.service.Highscore;
@@ -59,7 +56,7 @@ public final class GameStateManager {
 
     public void saveProgress(GallowGame game) {
         Gson gson = new Gson();
-        String json =gson.toJson(game);
+        String json = gson.toJson(game);
 
         prefsEditor.putString(gameProgressPreferenceName, json);
         prefsEditor.commit();
