@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import dk.blackdarkness.gg.R;
-import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
 
 /**
  * Created by awo on 12/11/2017.

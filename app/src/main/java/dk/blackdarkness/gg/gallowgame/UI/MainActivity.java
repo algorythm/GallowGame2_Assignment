@@ -7,10 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import dk.blackdarkness.gg.R;
-import dk.blackdarkness.gg.api.service.Highscore;
 import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

@@ -46,7 +46,6 @@ public final class GameStateManager {
             synchronized (GameStateManager.class) {
                 if (instance == null) {
                     instance = new GameStateManager(act);
-                    System.out.println("CREATED NEW INSTANCE");
                 }
             }
         }
@@ -127,7 +126,6 @@ public final class GameStateManager {
 
     public Highscore getLatestScoreObj() {
         Gson gson = new Gson();
-//        String json = mPrefs.getString(latestScorePreference, null);
         String json = mPrefs.getString(latestScorePreference, null);
 
         final Highscore highscoreObj = gson.fromJson(json, Highscore.class);
@@ -137,7 +135,6 @@ public final class GameStateManager {
 
     public double getPersonalHighscore() {
         Gson gson = new Gson();
-//        String json = mPrefs.getString(highestScorePreference, null);
         String json = mPrefs.getString(highestScorePreference, null);
 
         final Highscore highscoreObj = gson.fromJson(json, Highscore.class);
