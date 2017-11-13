@@ -1,5 +1,8 @@
 package dk.blackdarkness.gg.gallowgame.logic;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,16 +56,7 @@ public class GallowGame {
     public boolean isGameOver() { return this.gameHasBeenLost || this.gameHasBeenWon; }
 
     public GallowGame() {
-        possibleWords.add("car");
-        possibleWords.add("computer");
-        possibleWords.add("programming");
-        possibleWords.add("highway");
-        possibleWords.add("route");
-        possibleWords.add("walkway");
-        possibleWords.add("snail");
-        possibleWords.add("bird");
-
-        reset();
+        addDemoData();
     }
 
     public GallowGame(GallowGame gallowGame) {
@@ -74,6 +68,19 @@ public class GallowGame {
 //        this.lastGuessedLetterIsCorrect = gallowGame.lastGuessedLetterIsCorrect; // todo: wont work - needs a getter method
         this.gameHasBeenWon = gallowGame.isGameWon();
         this.gameHasBeenLost = gallowGame.isGameLost();
+    }
+
+    private void addDemoData() {
+        possibleWords.clear();
+
+        possibleWords.add("car");
+        possibleWords.add("computer");
+        possibleWords.add("programming");
+        possibleWords.add("highway");
+        possibleWords.add("route");
+        possibleWords.add("walkway");
+        possibleWords.add("snail");
+        possibleWords.add("bird");
     }
 
     public void reset() {
@@ -148,8 +155,8 @@ public class GallowGame {
         return sb.toString();
     }
 
-    public void getWordFromDR() throws IOException {
-        String data = getUrl("https://dr.dk");;
+    public void getWordsFromWeb(String url) throws IOException {
+        String data = getUrl(url);;
 
         data = data.substring(data.indexOf("<body")). // fjern headere
                 replaceAll("<.+?>", " ").toLowerCase(). // fjern tags

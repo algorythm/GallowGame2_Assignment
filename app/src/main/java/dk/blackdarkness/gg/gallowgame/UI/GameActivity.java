@@ -2,6 +2,7 @@ package dk.blackdarkness.gg.gallowgame.UI;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+import java.io.IOException;
 
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
@@ -23,17 +24,12 @@ import dk.blackdarkness.gg.gallowgame.logic.GallowGame;
  * Created by awo on 11/11/2017.
  */
 
-public class GameActivity extends AppCompatActivity {
-//    private SharedPreferences mPrefs;
-//    private SharedPreferences.Editor prefsEditor;
-
-//    private String gameProgressPreferenceName;
-
+public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private GallowGame game;
     private TextView tvVisibleWord;
     private TextView tvGuessedLetters;
     private ImageView gallowImage;
-    private Button guessBtn;
+    private Button guessBtn, newWordBtn;
     private EditText etGuessLetter;
 
     @Override
@@ -41,27 +37,19 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallowgame);
 
-//        mPrefs = getPreferences(MODE_PRIVATE);
-//        prefsEditor = mPrefs.edit();
-//        gameProgressPreferenceName = getResources().getString(R.string.gameProgressPreferenceName);
-
         this.tvVisibleWord = findViewById(R.id.game_tvVisibleWord);
         this.tvGuessedLetters = findViewById(R.id.game_tvGuessedLetters);
         this.gallowImage = findViewById(R.id.game_gallowImage);
         this.guessBtn = findViewById(R.id.game_guessBtn);
+        this.newWordBtn = findViewById(R.id.game_newWordBtn);
         this.etGuessLetter = findViewById(R.id.game_etGuessLetter);
+
+        guessBtn.setOnClickListener(this);
+        newWordBtn.setOnClickListener(this);
 
         // Adding back buttons
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Set guess button action
-        this.guessBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                guessLetter();
-            }
-        });
 
         // Set enter button on edit text
         this.etGuessLetter.setImeActionLabel("Guess!", KeyEvent.KEYCODE_ENTER);
@@ -79,12 +67,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        this.startNewGame();
-        this.guessLetter();
-    }
-
-    private void startNewGame() {
-        loadProgressOrStartNew();
+        initializeGame();
     }
 
     @Override
@@ -99,13 +82,56 @@ public class GameActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.game_guessBtn: guessLetter(); break;
+            case R.id.game_newWordBtn: newWordBtnClicked(); break;
+        }
+    }
 
+    private void initializeGame() {
+        final GallowGame oldGame = GameStateManager.getInstance(this).loadOldGameProgress();
 
-    private void loadProgressOrStartNew() {
-        this.game = GameStateManager.getInstance(this).loadProgressOrStartNew();
+        if (oldGame == null) {
+            this.game = new GallowGame();
+            this.game.reset();
+        } else {
+            this.game = oldGame;
+        }
 
-        setGallowImage();
-        this.tvVisibleWord.setText(this.game.getVisibleWord());
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    game.getWordsFromWeb("https://www.reddit.com/r/ProgrammerDadJokes/");
+                } catch (IOException e) {
+                    Log.e("Failed to fetcg", "Blah!!!! " + e.getMessage(), e);
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                tvVisibleWord.setText("Fetching from web...");
+                guessBtn.setEnabled(false);
+                etGuessLetter.setEnabled(false);
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+
+                guessBtn.setEnabled(true);
+                etGuessLetter.setEnabled(true);
+
+                setGallowImage();
+                System.out.println("Word = " + game.getWord());
+                tvVisibleWord.setText(game.getVisibleWord());
+            }
+        }.execute();
 
     }
 
@@ -128,6 +154,12 @@ public class GameActivity extends AppCompatActivity {
 
         checkGameOver();
 
+    }
+
+    private void newWordBtnClicked() {
+        game.reset();
+        System.out.println("New word = " + game.getWord());
+        tvVisibleWord.setText(game.getVisibleWord());
     }
 
     private void setGallowImage() {

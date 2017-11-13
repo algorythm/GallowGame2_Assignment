@@ -3,9 +3,12 @@ package dk.blackdarkness.gg.gallowgame.ctrl;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
+
+import java.io.IOException;
 
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.api.service.Highscore;
@@ -62,25 +65,12 @@ public final class GameStateManager {
         prefsEditor.commit();
     }
 
-    public GallowGame loadProgressOrStartNew() {
-        // Try to load a new game
-        GallowGame game;
+    public GallowGame loadOldGameProgress() {
+        final Gson gson = new Gson();
+        final String json = mPrefs.getString(gameProgressPreferenceName, null);
+        final GallowGame oldGame = gson.fromJson(json, GallowGame.class);
 
-        Gson gson = new Gson();
-        String json = mPrefs.getString(gameProgressPreferenceName, null);
-
-        if (json == null) System.out.println("JSON IS NULL");
-
-        GallowGame oldGame = gson.fromJson(json, GallowGame.class);
-        game = oldGame;
-
-        // If no previous game, start a new
-        if (game == null) {
-            System.out.println("GAME IS NULL");
-            game = new GallowGame();
-        }
-
-        return game;
+        return oldGame;
     }
 
     public void clearProgress() {
@@ -115,13 +105,11 @@ public final class GameStateManager {
     }
 
     public void saveLatestScore(String json) {
-        prefsEditor.putString(latestScorePreference, json);
-        prefsEditor.commit();
+        prefsEditor.putString(latestScorePreference, json).commit();
     }
 
     public void savePersonalHighscore(String json) {
-        prefsEditor.putString(highestScorePreference, json);
-        prefsEditor.commit();
+        prefsEditor.putString(highestScorePreference, json).commit();
     }
 
     public double getLatestScore() {

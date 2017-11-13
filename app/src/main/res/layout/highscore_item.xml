@@ -23,8 +23,8 @@
     <!-- Name Value -->
     <TextView
         android:id="@+id/hsitem_name"
-        android:layout_width="280dp"
-        android:layout_height="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="NULL"
         app:layout_constraintStart_toStartOf="@+id/hsitem_score"
@@ -45,12 +45,31 @@
     <!-- Score Value -->
     <TextView
         android:id="@+id/hsitem_score"
-        android:layout_width="283dp"
-        android:layout_height="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="NULL"
         android:textColor="@color/colorAccent"
         app:layout_constraintStart_toEndOf="@+id/hsitem_scoreDesc"
         app:layout_constraintTop_toBottomOf="@+id/hsitem_name" />
+
+    <TextView
+        android:id="@+id/hsitem_guessedWordDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:text="Word : "
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/hsitem_score" />
+
+    <TextView
+        android:id="@+id/hsitem_guessedWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NULL"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@+id/hsitem_guessedWordDesc"
+        app:layout_constraintTop_toTopOf="@+id/hsitem_score" />
 </android.support.constraint.ConstraintLayout>
