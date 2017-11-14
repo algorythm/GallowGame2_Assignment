@@ -99,7 +99,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             this.game = oldGame;
         }
 
-        new AsyncTask<Void, Void, Void>() {
+        // Implement as inner class to prevent memory leaks (could also use a static method to resolve the issue)
+        //    if not, GameActivity might not be able to be garbage collected since it could be possible for the following to stay alive longer than the activity
+        class FetchWordsAsync extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
@@ -130,7 +132,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("Word = " + game.getWord());
                 tvVisibleWord.setText(game.getVisibleWord());
             }
-        }.execute();
+        }
+        new FetchWordsAsync().execute();
 
     }
 
