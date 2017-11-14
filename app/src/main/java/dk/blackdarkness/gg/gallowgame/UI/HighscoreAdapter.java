@@ -29,7 +29,7 @@ public class HighscoreAdapter extends ArrayAdapter {
         final LayoutInflater inflater = LayoutInflater.from(getContext());
         final View hsItem = inflater.inflate(R.layout.highscore_item, parent, false);
 
-        final Highscore highscore = (Highscore) getItem(position); // TODO: Might not work....
+        final Highscore highscore = (Highscore) getItem(position);
 
         final TextView nameTextView = hsItem.findViewById(R.id.hsitem_name);
         final TextView scoreTextView = hsItem.findViewById(R.id.hsitem_score);

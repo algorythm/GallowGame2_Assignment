@@ -62,7 +62,6 @@ public class GallowGame {
         this.usedLetters = gallowGame.getUsedLetters();
         this.visibleWord = gallowGame.getVisibleWord();
         this.wrongLettersCount = gallowGame.getWrongLettersCount();
-//        this.lastGuessedLetterIsCorrect = gallowGame.lastGuessedLetterIsCorrect; // todo: wont work - needs a getter method
         this.gameHasBeenWon = gallowGame.isGameWon();
         this.gameHasBeenLost = gallowGame.isGameLost();
     }
