@@ -82,18 +82,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startGame() {
-        this.disableButtons();
-
         final Intent getGallowGameIntent = new Intent(this, GameActivity.class);
         final int result = 1;
+
+        getGallowGameIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
         startActivityForResult(getGallowGameIntent, result);
     }
 
     private void gotoHighscores() {
-        this.disableButtons();
-
         final Intent getHighscores = new Intent(this, HighscoresActivity.class);
+
+        getHighscores.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
         startActivity(getHighscores);
     }
 
@@ -103,9 +104,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void creditsBtnClicked() {
-        this.disableButtons();
-
         final Intent getCredits = new Intent(this, CreditsActivity.class);
+
+        getCredits.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
         startActivity(getCredits);
     }
 

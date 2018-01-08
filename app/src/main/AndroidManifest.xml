@@ -20,22 +20,23 @@
         </activity>
         <activity
             android:name=".gallowgame.UI.GameActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:label="Game"
             android:theme="@style/AppTheme" />
-        <activity android:name=".gallowgame.UI.HighscoresActivity" />
+        <activity android:name=".gallowgame.UI.HighscoresActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".gallowgame.UI.AddHighscoreActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:label="Save Highscore"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".gallowgame.UI.CreditsActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:label="Credits"
             android:theme="@style/AppTheme" />
         <activity android:name=".gallowgame.UI.HighscoreActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:label="Highscore"
             android:theme="@style/AppTheme" />
     </application>
