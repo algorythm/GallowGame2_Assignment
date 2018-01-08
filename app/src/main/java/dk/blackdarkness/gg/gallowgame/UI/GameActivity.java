@@ -105,7 +105,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
-                    game.getWordsFromWeb("https://www.reddit.com/r/ProgrammerDadJokes/");
+//                    game.getWordsFromWeb("https://www.reddit.com/r/ProgrammerDadJokes/");
+                    game.getWordsFromWeb("http://words.wiberg.tech:8080/50");
                 } catch (IOException e) {
                     Log.e("Failed to fetcg", "Blah!!!! " + e.getMessage(), e);
                     e.printStackTrace();

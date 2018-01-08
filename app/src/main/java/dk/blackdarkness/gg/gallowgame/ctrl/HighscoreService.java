@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HighscoreService {
     private  static Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://api.gg.blackdarkness.dk/")
+            .baseUrl("http://highscore-api.wiberg.tech/")
             .addConverterFactory(GsonConverterFactory.create());
 
     public static Call<List<Highscore>> getFetchAsync() {
