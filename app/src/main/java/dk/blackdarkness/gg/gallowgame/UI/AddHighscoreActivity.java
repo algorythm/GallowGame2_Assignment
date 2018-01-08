@@ -16,7 +16,6 @@ import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.api.service.Highscore;
 import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
 import dk.blackdarkness.gg.gallowgame.ctrl.HighscoreService;
-import nl.dionsegijn.konfetti.KonfettiView;
 import nl.dionsegijn.konfetti.models.Shape;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +30,6 @@ public class AddHighscoreActivity extends AppCompatActivity implements View.OnCl
     private TextView scoreText;
     private EditText nameText;
     private ProgressBar spinner;
-    private KonfettiView konfettiView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,19 +42,8 @@ public class AddHighscoreActivity extends AppCompatActivity implements View.OnCl
         nameText = findViewById(R.id.addhs_name);
         spinner = findViewById(R.id.addhs_spinner);
 
-        konfettiView = findViewById(R.id.konfettiView);
-
         saveBtn.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
-
-        konfettiView.build()
-                .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
-                .setDirection(0.0, 359.0)
-                .setSpeed(1f, 5f)
-                .setFadeOutEnabled(true)
-                .setTimeToLive(2000L)
-                .addShapes(Shape.RECT, Shape.CIRCLE)
-                .stream(300, 5000L);
 
         scoreText.setText(Double.toString(GameStateManager.getInstance(this).getLatestScore()));
     }

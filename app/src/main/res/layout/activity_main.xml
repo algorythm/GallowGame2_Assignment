@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context="dk.blackdarkness.gg.gallowgame.UI.MainActivity">
 
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/main_tvHighscore"
         android:layout_width="wrap_content"

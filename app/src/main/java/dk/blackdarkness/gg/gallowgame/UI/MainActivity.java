@@ -1,6 +1,8 @@
 package dk.blackdarkness.gg.gallowgame.UI;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +11,14 @@ import android.widget.TextView;
 
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
+import nl.dionsegijn.konfetti.KonfettiView;
+import nl.dionsegijn.konfetti.models.Shape;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnStartGame, btnHighscores, btnClearAllPrefs, btnCredits;
     private TextView winnerText, highscoreText;
+
+    private KonfettiView konfettiView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.winnerText = findViewById(R.id.main_winnerText);
         this.highscoreText = findViewById(R.id.main_tvHighscore);
+
+        this.konfettiView = findViewById(R.id.konfettiView);
 
         this.btnStartGame.setOnClickListener(this);
         this.btnHighscores.setOnClickListener(this);
@@ -101,6 +109,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(getCredits);
     }
 
+    private void showKonfetti() {
+        konfettiView.build()
+                .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                .setDirection(0.0, 359.0)
+                .setSpeed(1f, 5f)
+                .setFadeOutEnabled(true)
+                .setTimeToLive(2000L)
+                .addShapes(Shape.RECT, Shape.CIRCLE)
+                .stream(300, 5000L);
+
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.winner8bit);
+        mp.start();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -110,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             final boolean gameWon = data.getStringExtra("gameWon").equals("true");
             String gameWonText = "Game was ";
 
-            if (gameWon) gameWonText += "won";
+            if (gameWon) {gameWonText += "won"; showKonfetti(); }
             else         gameWonText += "lost";
 
             gameWonText += ".";
