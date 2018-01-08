@@ -27,6 +27,15 @@ public class HighscoreService {
         return call;
     }
 
+    public static Call<Highscore> getFetchAsync(int id) {
+        Retrofit retrofit = builder.build();
+
+        HighscoreClient highscoreClient = retrofit.create(HighscoreClient.class);
+        Call<Highscore> call = highscoreClient.getHighscore(id);
+
+        return call;
+    }
+
     public static Call<Highscore> getPostAsync(Highscore highscore) {
         System.out.println(highscore.getName() + " " + highscore.getScore());
         Retrofit retrofit = builder.build();

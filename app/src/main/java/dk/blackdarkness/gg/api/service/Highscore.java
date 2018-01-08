@@ -13,6 +13,14 @@ public class Highscore {
 
     public Highscore() { }
 
+    public Highscore(int id, String name, String word, String guessed_letters, double score) {
+        this.id = id;
+        this.name = name;
+        this.word = word;
+        this.guessed_letters = guessed_letters;
+        this.score = score;
+    }
+
     public Highscore(String name, String word, String guessed_letters, double score) {
         this.name = name;
         this.word = word;

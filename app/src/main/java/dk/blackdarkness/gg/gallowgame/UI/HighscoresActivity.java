@@ -1,10 +1,12 @@
 package dk.blackdarkness.gg.gallowgame.UI;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,6 +26,7 @@ public class HighscoresActivity extends AppCompatActivity {
     private ProgressBar spinner;
     private TextView loadingText;
     private ListView listView;
+    private List<Highscore> highscores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,30 @@ public class HighscoresActivity extends AppCompatActivity {
         loadingText = findViewById(R.id.highscores_loadingText);
         listView = findViewById(R.id.highscores_listView);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                listItemClicked(i);
+            }
+        });
+
         fetchHighscores();
+    }
+
+    private void listItemClicked(int index) {
+        Highscore highscore = this.highscores.get(index);
+
+        Intent getHighscore = new Intent(this, HighscoreActivity.class);
+
+        Bundle b = new Bundle();
+        b.putInt("id", highscore.getId());
+        b.putString("name", highscore.getName());
+        b.putString("word", highscore.getWord());
+        b.putString("guessed_letters", highscore.getGuessed_letters());
+        b.putDouble("score", highscore.getScore());
+        getHighscore.putExtras(b);
+
+        startActivity(getHighscore);
     }
 
     @Override
@@ -55,9 +81,10 @@ public class HighscoresActivity extends AppCompatActivity {
         HighscoreService.getFetchAsync().enqueue(new Callback<List<Highscore>>() {
             @Override
             public void onResponse(Call<List<Highscore>> call, Response<List<Highscore>> response) {
-                List<Highscore> highscores = response.body();
+                List<Highscore> fetchedHighscores = response.body();
 
-                fillData(highscores);
+                highscores = fetchedHighscores;
+                fillData(fetchedHighscores);
             }
 
             @Override
