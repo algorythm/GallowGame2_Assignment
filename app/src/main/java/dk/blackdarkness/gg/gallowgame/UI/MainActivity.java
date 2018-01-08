@@ -45,6 +45,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.main_creditsBtn: creditsBtnClicked(); break;
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.enableButtons();
+    }
+
+    private void disableButtons() {
+        this.btnStartGame.setEnabled(false);
+        this.btnCredits.setEnabled(false);
+        this.btnHighscores.setEnabled(false);
+    }
+
+    private void enableButtons() {
+        this.btnStartGame.setEnabled(true);
+        this.btnCredits.setEnabled(true);
+        this.btnHighscores.setEnabled(true);
+    }
+
     private void setHighscoreText() {
         double personalHighscore = GameStateManager.getInstance(this).getPersonalHighscore();
         if (personalHighscore == -1.0) {
@@ -55,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startGame() {
+        this.disableButtons();
+
         final Intent getGallowGameIntent = new Intent(this, GameActivity.class);
         final int result = 1;
 
@@ -62,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void gotoHighscores() {
+        this.disableButtons();
+
         final Intent getHighscores = new Intent(this, HighscoresActivity.class);
         startActivity(getHighscores);
     }
@@ -72,7 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void creditsBtnClicked() {
-        System.out.println("SHOWING Credits!!");
+        this.disableButtons();
+
         final Intent getCredits = new Intent(this, CreditsActivity.class);
         startActivity(getCredits);
     }
