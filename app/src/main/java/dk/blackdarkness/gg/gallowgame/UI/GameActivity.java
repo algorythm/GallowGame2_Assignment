@@ -161,8 +161,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private void newWordBtnClicked() {
         game.reset();
-        System.out.println("New word = " + game.getWord());
-        tvVisibleWord.setText(game.getVisibleWord());
+        this.initializeGame();
+//        System.out.println("New word = " + game.getWord());
+//        tvVisibleWord.setText(game.getVisibleWord());
     }
 
     private void setGallowImage() {
