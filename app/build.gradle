@@ -6,8 +6,8 @@ android {
         applicationId "dk.blackdarkness.gg"
         minSdkVersion 21
         targetSdkVersion 21
-        versionCode 210030000
-        versionName "3.0.0"
+        versionCode 210030100
+        versionName "3.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
