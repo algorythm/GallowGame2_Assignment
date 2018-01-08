@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gallow Game</string>
+    <string name="app_name">s165241 - Hangman</string>
 
     <!-- HIGHSCORE ITEM -->
     <string name="hsitem_nameDesc">Name: </string>
