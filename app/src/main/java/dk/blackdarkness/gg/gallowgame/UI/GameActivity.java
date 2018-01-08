@@ -17,14 +17,14 @@ import java.io.IOException;
 
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.gallowgame.ctrl.GameStateManager;
-import dk.blackdarkness.gg.gallowgame.logic.GallowGame;
+import dk.blackdarkness.gg.gallowgame.logic.Hangman;
 
 /**
  * Created by awo on 11/11/2017.
  */
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
-    private GallowGame game;
+    private Hangman game;
     private TextView tvVisibleWord;
     private TextView tvGuessedLetters;
     private ImageView gallowImage;
@@ -90,10 +90,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeGame() {
-        final GallowGame oldGame = GameStateManager.getInstance(this).loadOldGameProgress();
+        final Hangman oldGame = GameStateManager.getInstance(this).loadOldGameProgress();
 
         if (oldGame == null) {
-            this.game = new GallowGame();
+            this.game = new Hangman();
             this.game.reset();
         } else {
             this.game = oldGame;

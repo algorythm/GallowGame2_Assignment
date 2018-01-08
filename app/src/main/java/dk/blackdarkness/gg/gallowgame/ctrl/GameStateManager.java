@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 
 import dk.blackdarkness.gg.R;
 import dk.blackdarkness.gg.api.service.Highscore;
-import dk.blackdarkness.gg.gallowgame.logic.GallowGame;
+import dk.blackdarkness.gg.gallowgame.logic.Hangman;
 
 /**
  * Created by awo on 12/11/2017.
@@ -53,7 +53,7 @@ public final class GameStateManager {
         return instance;
     }
 
-    public void saveProgress(GallowGame game) {
+    public void saveProgress(Hangman game) {
         Gson gson = new Gson();
         String json = gson.toJson(game);
 
@@ -61,10 +61,10 @@ public final class GameStateManager {
         prefsEditor.commit();
     }
 
-    public GallowGame loadOldGameProgress() {
+    public Hangman loadOldGameProgress() {
         final Gson gson = new Gson();
         final String json = mPrefs.getString(gameProgressPreferenceName, null);
-        final GallowGame oldGame = gson.fromJson(json, GallowGame.class);
+        final Hangman oldGame = gson.fromJson(json, Hangman.class);
 
         return oldGame;
     }
@@ -85,7 +85,7 @@ public final class GameStateManager {
         prefsEditor.clear().commit();
     }
 
-    public void saveScore(GallowGame game) {
+    public void saveScore(Hangman game) {
         Gson gson = new Gson();
         System.out.println();
 

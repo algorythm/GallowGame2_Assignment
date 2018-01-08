@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-public class GallowGame {
+public class Hangman {
     private ArrayList<String> possibleWords = new ArrayList<>();
     private String word;
     private ArrayList<String> usedLetters = new ArrayList<>();
@@ -52,18 +52,18 @@ public class GallowGame {
     }
     public boolean isGameOver() { return this.gameHasBeenLost || this.gameHasBeenWon; }
 
-    public GallowGame() {
+    public Hangman() {
         addDemoData();
     }
 
-    public GallowGame(GallowGame gallowGame) {
-        this.possibleWords = gallowGame.getPossibleWords();
-        this.word = gallowGame.getWord();
-        this.usedLetters = gallowGame.getUsedLetters();
-        this.visibleWord = gallowGame.getVisibleWord();
-        this.wrongLettersCount = gallowGame.getWrongLettersCount();
-        this.gameHasBeenWon = gallowGame.isGameWon();
-        this.gameHasBeenLost = gallowGame.isGameLost();
+    public Hangman(Hangman hangman) {
+        this.possibleWords = hangman.getPossibleWords();
+        this.word = hangman.getWord();
+        this.usedLetters = hangman.getUsedLetters();
+        this.visibleWord = hangman.getVisibleWord();
+        this.wrongLettersCount = hangman.getWrongLettersCount();
+        this.gameHasBeenWon = hangman.isGameWon();
+        this.gameHasBeenLost = hangman.isGameLost();
     }
 
     private void addDemoData() {
